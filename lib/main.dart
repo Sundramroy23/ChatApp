@@ -1,3 +1,4 @@
+import 'package:chatapp/auth/login_or_register.dart';
 import 'package:chatapp/pages/login_page.dart';
 import 'package:chatapp/pages/signup_page.dart';
 import 'package:chatapp/theme/light_theme.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Chat App',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      home: SignupPage(),
+      home: LoginOrRegister(),
     );
   }
 }

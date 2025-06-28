@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   final void Function()? ontap;
+  final String message;
 
-  MyButton({super.key, required this.ontap});
+  MyButton({super.key, required this.ontap, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class MyButton extends StatelessWidget {
         ),
         margin: EdgeInsets.symmetric(horizontal: 25),
         padding: EdgeInsets.all(15),
-        child: Center(child: Text("Submit")),
+        child: Center(child: Text(message)),
       ),
     );
   }

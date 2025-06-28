@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 
 class SignupPage extends StatelessWidget {
   void login() {}
+  final VoidCallback ontap;
+
+  SignupPage({super.key, required this.ontap});
 
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _pwdcontroller = TextEditingController();
+  final TextEditingController _pwdtwocontroller = TextEditingController();
 
-  SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class SignupPage extends StatelessWidget {
             const SizedBox(height: 25),
             // welcome tect
             Text(
-              "Welcome Back you have been missed!",
+              "Let's create an account for you",
               style: TextStyle(
                 fontSize: 16,
                 color: Theme.of(context).colorScheme.primary,
@@ -50,8 +53,15 @@ class SignupPage extends StatelessWidget {
             ),
             // sunmit
             const SizedBox(height: 25),
+            MyTextfield(
+              hintext: "Confirm Password",
+              obscuretext: true,
+              controller: _pwdtwocontroller,
+            ),
+            // sunmit
+            const SizedBox(height: 25),
 
-            MyButton(ontap: login),
+            MyButton(ontap: login, message: "Register"),
 
             const SizedBox(height: 25),
 
@@ -59,17 +69,20 @@ class SignupPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Not a Member? ",
+                  "Already have an account ? ",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                Text(
-                  " Register Now",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                GestureDetector(
+                  onTap: ontap,
+                  child: Text(
+                    " Log In",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],

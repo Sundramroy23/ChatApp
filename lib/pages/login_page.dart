@@ -3,7 +3,9 @@ import 'package:chatapp/components/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+  final void Function()? ontap;
+
+  LoginPage({super.key, required this.ontap});
 
   void login() {}
 
@@ -51,7 +53,7 @@ class LoginPage extends StatelessWidget {
             // sunmit
             const SizedBox(height: 25),
 
-            MyButton(ontap: login),
+            MyButton(ontap: login, message: "Submit"),
 
             const SizedBox(height: 25),
 
@@ -64,12 +66,15 @@ class LoginPage extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                Text(
-                  " Register Now",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                GestureDetector(
+                  onTap: ontap,
+                  child: Text(
+                    " Register Now",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],
