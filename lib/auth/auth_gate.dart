@@ -9,14 +9,57 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+      body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        // initialData: initialData,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if(snapshot.hasData){
-            return const HomePage();
-          }
-          else{
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          if (snapshot.hasData) {
+            final user = snapshot.data!;
+            if (!user.emailVerified) {
+              Future.microtask(() {
+                showDialog(
+                  context: context,
+                  builder:
+                      (context) => AlertDialog(
+                        title: const Text("Verify your email"),
+                        content: const Text(
+                          'Please verify your email address to continue.',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () async {
+                              await user.sendEmailVerification();
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Send Verification Email"),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      ),
+                );
+              });
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('Please verify your email to continue.'),
+                    SizedBox(height: 16),
+                    TextButton(
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signOut();
+                      },
+                      child: const Text("Back to Login"),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return const HomePage();
+            }
+          } else {
             return const LoginOrRegister();
           }
         },

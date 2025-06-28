@@ -28,3 +28,29 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class VerificationEmailSender extends StatelessWidget {
+  final User user;
+
+  const VerificationEmailSender({super.key, required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () async {
+        try {
+          await user.sendEmailVerification();
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('Verification email sent!')));
+        } catch (e) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('Error: $e')));
+        }
+        Navigator.of(context).pop();
+      },
+      child: const Text("Send Verification Email"),
+    );
+  }
+}
