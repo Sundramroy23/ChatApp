@@ -11,7 +11,7 @@ class LoginOrRegister extends StatefulWidget {
 
 class _LoginOrRegisterState extends State<LoginOrRegister> {
   bool login = true;
-
+  // we will pass toggle page to the pages to switch between them
   void togglePage() {
     setState(() {
       login = !login;
@@ -21,6 +21,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
   @override
   Widget build(BuildContext context) {
     if (login) {
+      // pass togglePage as parameter from here thus pages can interact
       return LoginPage(ontap: togglePage);
     } else {
       return SignupPage(ontap: togglePage);

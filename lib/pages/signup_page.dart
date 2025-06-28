@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 
 class SignupPage extends StatelessWidget {
   void login() {}
-  final VoidCallback ontap;
+  final VoidCallback ontap; //we will accept togglePage parameter as ontap here
 
   SignupPage({super.key, required this.ontap});
 
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _pwdcontroller = TextEditingController();
   final TextEditingController _pwdtwocontroller = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
