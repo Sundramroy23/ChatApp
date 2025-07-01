@@ -1,9 +1,25 @@
+import 'package:chatapp/auth/auth_services.dart';
 import 'package:chatapp/components/my_button.dart';
 import 'package:chatapp/components/my_textfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatelessWidget {
-  void login() {}
+  void ontapSignup(BuildContext context) {
+    final _auth = AuthServices();
+    if (_pwdcontroller.text == _pwdtwocontroller.text &&
+        _pwdcontroller.text.isNotEmpty) {
+      try {
+        _auth.singUpWithEmail(_emailcontroller.text, _pwdcontroller.text);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(title: Text(e.toString())),
+        );
+      }
+    }
+  }
+
   final VoidCallback ontap; //we will accept togglePage parameter as ontap here
 
   SignupPage({super.key, required this.ontap});
@@ -60,7 +76,7 @@ class SignupPage extends StatelessWidget {
             // sunmit
             const SizedBox(height: 25),
 
-            MyButton(ontap: login, message: "Register"),
+            MyButton(ontap: () => ontapSignup(context), message: "Register"),
 
             const SizedBox(height: 25),
 
