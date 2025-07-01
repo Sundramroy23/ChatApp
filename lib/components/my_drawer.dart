@@ -1,4 +1,4 @@
-import 'package:chatapp/auth/logout.dart';
+import 'package:chatapp/services/auth/logout.dart';
 import 'package:chatapp/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
