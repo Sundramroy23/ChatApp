@@ -137,7 +137,7 @@ class ChatServices extends ChangeNotifier {
 
     await _firestore
         .collection('Users')
-        .doc('BlockedUsers')
+        .doc(currentUser!.uid)
         .collection('BlockedUsers')
         .doc(blockedUserId)
         .delete();
